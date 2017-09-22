@@ -24,9 +24,18 @@ import scipy.integrate as integrate
 import multiprocessing
 from functools import partial
 
-from . import ensure_dir
-from . import find_nannearest_idx
-from . import find_nearest_idx
+def ensure_dir(file_path):
+    directory = os.path.dirname(file_path)
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
+def find_nearest_idx(array,value):
+    idx = (np.abs(array-value)).argmin()
+    return [idx]
+
+def find_nannearest_idx(array,value):
+    idx = np.nanargmin(np.abs(array-value))
+    return [idx]
 
 
 
